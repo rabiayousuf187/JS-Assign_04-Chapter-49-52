@@ -229,7 +229,7 @@ function signup() {
 
         if( ( obj['name'] !== ( "" ) ) && ( obj['username'] !== ( "" ) ) && ( obj['email'] !== ( "" ) ) )
         {
-            console.log(document.getElementById('body').style.backgroundSize = "contain");
+            // console.log(document.getElementById('body').style.backgroundSize = "contain");
             std_name.push(obj['name']);
             std_username.push(obj['username']);
             std_email.push(obj['email']);
