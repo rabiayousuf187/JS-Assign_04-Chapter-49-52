@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Show Less or More</title>
+</head>
+
+<style>
+    
+    .content{
+        width: 600px;
+    }
+    .content img{
+        text-align: center
+    }
+    .content p, .content a{
+        text-align: left;
+    }
+    .content a{
+        text-decoration-line: none;
+    }
+    .show{
+        display: block;
+    }
+    .hidden{
+        display: none;
+    }
+</style>
+<script>
+        
+        // Show Less or More
+
+        
+
+    function showhide()
+    {
+            let show_para = document.getElementById('show_more');
+            console.log(show_para);
+            let link_more = document.getElementById('a_more');
+            let link_less = document.getElementById('a_less');
+
+            if( show_para.className == "hidden" ) //&& link_more.className === "show"
+            {
+                show_para.className = "show";
+                console.log(show_para);
+                link_more.className = "hidden";
+                console.log(link_more);
+                
+            }
+            else
+            {
+                show_para.className = "hidden";
+                link_more.className = "show";
+            }
+    }
+            
+</script>
+<body>
+    
+    <div class="content">
+            <img src="./image/buy-triplicate-books1.jpg" width="150" height="150">
+            <p id="less para">
+                    <b>A full-color introduction to the basics of HTML and CSS from the publishers of Wrox!</b> 
+                    Every day, more and more people want to learn some HTML and CSS. Joining the professional 
+                    web designers and programmers are new audiences who need to know a little bit of code at 
+                    work (update a content management system or e-commerce store) and those who want to make 
+                    their personal blogs more attractive. Many books teaching HTML and CSS are dry and only 
+                    written for those who want to become 
+                    <a href="Javascript:void(0)" id = "a_more" class="show" onclick="showhide()">More >></a>
+            </p>
+            <p id="show_more" class="hidden">
+                    This educational book is one that you will enjoy picking up, reading, then referring back to. 
+                    It will make you wish other technical topics were presented in such a simple, attractive and 
+                    engaging way!
+                    
+                   <br><br>This book is also available as part of a set in hardcover - Web Design with HTML, CSS, 
+                   JavaScript and jQuery, 9781119038634; and in softcover - Web Design with HTML, CSS, JavaScript 
+                   and jQuery, 9781118907443.
+                   <a href="Javascript:void(0)" id = "a_less" class="show" onclick="showhide()">Less >></a>
+            </p>
+            
+    </div>
+    
+
+</body>
+</html>
