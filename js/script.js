@@ -56,15 +56,18 @@ function signup() {
         let name = document.getElementById('full_name').value;
         let username = document.getElementById('username').value;
         let email = document.getElementById('email').value;
+        let phone = document.getElementById('phone_num').value;
 
         console.log(name);
         console.log(username);
         console.log(email);
+        console.log(phone);
         
         obj =   {
                         name : name,
                         username : username,
-                        email : email
+                        email : email,
+                        phone : phone
                 };
 
         console.log("obj" , obj);

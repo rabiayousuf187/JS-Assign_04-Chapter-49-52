@@ -1,5 +1,12 @@
+#data_table{
+    background: none;
+}
 body{
     background: linear-gradient(294deg, #1a150bf2, #09540980), url(https://wallpaperset.com/w/full/5/7/f/522711.jpg);
+}
+#data_table_form{
+    background: linear-gradient(294deg, #1a150bf2, #09540980), url(https://wallpaperset.com/w/full/5/7/f/522711.jpg);
+    padding: 0px 0px 40px;
 }
 .signup{
     margin: 120px 50px;
@@ -8,7 +15,7 @@ body{
     color: white;
     font-size: 35px;
     text-align: center;
-    margin: 40px 0px;
+    padding: 40px 0px;
 }
 #form1 label {
     color: white;
@@ -29,4 +36,11 @@ body{
     /* font-size: 35px; */
     color: rgb(255, 255, 255);
     /* margin: 100px 50px; */
+}
+
+#sect_table{
+    margin-top: 200px;
+}
+.show{
+    display: block;
 }
