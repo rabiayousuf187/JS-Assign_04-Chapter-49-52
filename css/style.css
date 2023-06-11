@@ -16,3 +16,6 @@ body{
 #form1 .btn-primary {
     width: 100%;
 }
+.hidden{
+    display: none;
+}
