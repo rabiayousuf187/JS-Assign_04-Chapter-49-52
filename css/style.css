@@ -26,21 +26,28 @@ body{
 .hidden{
     display: none;
 }
-.show_more .heading{
+.show_more .heading, 
+#table_div .heading{
     font-size: 35px;
     color: rgb(255, 255, 255);
     margin: 10px 50px;
     font-weight: 600;
+}
+#table_div .heading{
+    color: black;
 }
 .show_more p{
     /* font-size: 35px; */
     color: rgb(255, 255, 255);
     /* margin: 100px 50px; */
 }
-
-#sect_table{
-    margin-top: 200px;
+#sect_table {
+    margin: 50px 50px;
 }
 .show{
     display: block;
+}
+
+.btn-danger {
+    margin-right: 10px;
 }

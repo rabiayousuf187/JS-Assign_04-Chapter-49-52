@@ -1,3 +1,6 @@
+
+let selected_id = null;
+
 function signup() {
     let name = document.getElementById('full_name').value;
     let username = document.getElementById('username').value;
@@ -33,229 +36,237 @@ function signup() {
 // ***********    For Data Table
 
 
-    // 1. Create a signup form and display form data in your webpage on submission.
-    
-    let std_name = [];
-    let std_username = [];
-    let std_email= [];
+// 1. Create a signup form and display form data in your webpage on submission.
 
-    let render_table;   
-    let row_id;
-    
+let std_name = [];
+let std_username = [];
+let std_email = [];
+let std_phone = [];
+let std_password = [];
 
-    let obj;
+let render_table;
+let row_id = null;
+
+
+let obj;
 
 //show or hide btn
-    let sub_btn = document.getElementById('submit'); 
-    let upd_btn = document.getElementById('update');
+let sub_btn = document.getElementById('submit');
 
 
-    function get_ele_value()
-    {
+function get_ele_value() {
 
-        let name = document.getElementById('full_name').value;
-        let username = document.getElementById('username').value;
-        let email = document.getElementById('email').value;
-        let phone = document.getElementById('phone_num').value;
+    let name = document.getElementById('full_name').value;
+    let username = document.getElementById('username').value;
+    let email = document.getElementById('email').value;
+    let phone = document.getElementById('phone_num').value;
+    let password = document.getElementById('password').value;
 
-        console.log(name);
-        console.log(username);
-        console.log(email);
-        console.log(phone);
-        
-        obj =   {
-                        name : name,
-                        username : username,
-                        email : email,
-                        phone : phone
-                };
+    console.log(name);
+    console.log(username);
+    console.log(email);
+    console.log(phone);
+    console.log(password);
 
-        console.log("obj" , obj);
+    obj = {
+        name: name,
+        username: username,
+        email: email,
+        phone: phone,
+        password: password
+    };
 
-        return obj;
+    console.log("obj", obj);
 
-    }
+    return obj;
 
-   
-    function show_table( )
-    {
+}
 
-        let show_div = document.getElementById('table_div');
-        show_div.classList.add('show');
-        
-        let tbody_show = document.getElementById('tbody');
+function row_delete(button_id) {
+    button_id = document.getElementById(button_id).id;
+    console.log("button_id", button_id);
 
-        render_table = "";
-        for(let a = 0 ; a < std_name.length ; a++ )
-        {
+    button_id = button_id.split("delete_id_");
+    console.log("button_id", button_id);
+    // console.log("button_id[0]" , button_id[0]);
 
-            let c =  " row_delete('delete_id_" + [a] + "')";
-            let d =  " row_edit('edit_id_" + [a] + "')";
-
-            render_table += 
-                            "<tr id='row_id_" + a + "'><td id='roll_id_" + a + "'>" + a + 
-                            "</td><td id='name_id_"+ a +"' class = 'td_style'>" + std_name[a] + 
-                            "</td><td id='username_id_"+ a+"'>" + std_username[a] + 
-                            "</td><td id='email_id_" + a +"'>" + std_email[a] + 
-                            "</td><td class = 'action'>" + 
-                            "<button id='delete_id_"+ [a] +"' class = 'btn btn-danger' onclick =" + c  + "><i class='fas fa-trash-alt' id = 'del_id_" + [a] + "'></i></button>" + 
-                            "<button id='edit_id_"+ [a] +"' class = 'btn btn-warning' onclick=" + d + "><i class='fas fa-pencil-alt' id = 'edi_id_" + [a] + "'></i></button></td></tr>";
-  
-        }
-        tbody_show.innerHTML =  render_table ;
-        console.log(render_table);
-
-        return render_table;
-        
-    }
+    //button_id[1] = row id
+    console.log("button_id[1]", button_id[1]);
 
 
-    function on_update()
-    {
-        
-        obj =  get_ele_value();
-        
-        console.log('row_id' , row_id);
+    obj = get_ele_value();
+    std_name.splice(button_id[1], 1);
+    std_username.splice(button_id[1], 1);
+    std_email.splice(button_id[1], 1);
+    std_phone.splice(button_id[1], 1);
+    std_password.splice(button_id[1], 1);
 
-        std_name[row_id] = obj['name']
-        std_username[row_id] = obj['username']
-        std_email[row_id] = obj['email']
+    console.log("std_name", std_name);
+    console.log("std_username", std_username);
+    console.log("std_email", std_email);
+    console.log("std_phone", std_phone);
+    console.log("std_password", std_password);
 
-        console.log("std_name" , std_name);
-        console.log("std_username" , std_username);
-        console.log("std_email" , std_email);
+    show_table();
 
-        show_table( std_name , std_username , std_email  );
-        console.log("show_table" , show_table( std_name , std_username , std_email  ));
+}
 
-//update btn hidden after update
-        console.log(upd_btn);
-        upd_btn.classList.remove('show');
-        
-//submit btn after when update
-        console.log(sub_btn);
-        sub_btn.classList.remove('hidden');
+function on_submit() {
 
-        name = document.getElementById('full_name').value = " ";
-        username = document.getElementById('username').value = " ";
-        email = document.getElementById('email').value = " ";
+    obj = get_ele_value();
 
-        console.log(name);
-        console.log(username);
-        console.log(email);
-    }
+    if ((obj['name'] !== ("")) && (obj['username'] !== ("")) && (obj['email'] !== (""))&& (obj['phone'] !== (""))&& (obj['password'] !== (""))) {
 
+        console.log('row_id', row_id);
+        if (row_id !== null) {
+            std_name[row_id] = obj['name']
+            std_username[row_id] = obj['username']
+            std_email[row_id] = obj['email']
+            std_phone[row_id] = obj['phone']
+            std_password[row_id] = obj['password']
+    
+            console.log("std_name", std_name);
+            console.log("std_username", std_username);
+            console.log("std_email", std_email);
+            console.log("std_phone", std_phone);
+            console.log("std_password", std_password);
+    
+            let c = " row_delete('delete_id_" + row_id + "')";
+            let d = " row_edit('edit_id_" + row_id + "')";
+    
+            document.getElementById('row_id_'+row_id).innerHTML = 
+            "<tr id='row_id_" +row_id+ "'><td id='roll_id_" +row_id+ "'>" +row_id+
+            "</td><td id='name_id_" +row_id+ "' class = 'td_style'>" + std_name[row_id] +
+            "</td><td id='username_id_" +row_id+ "'>" + std_username[row_id] +
+            "</td><td id='email_id_" +row_id+ "'>" + std_email[row_id] +
+            "</td><td id='phone_id_" +row_id+ "'>" + std_phone[row_id] +
+            "</td><td class = 'action'>" +
+            "<button id='delete_id_" + [row_id] + "' class = 'btn btn-danger' onclick ="+ c + "><i class='fas fa-trash-alt' id = 'del_id_" + [row_id] + "'></i></button>" +
+            "<button id='edit_id_" + [row_id] + "' class = 'btn btn-warning' onclick=" + d + "><i class='fas fa-pencil-alt' id = 'edi_id_" + [row_id] + "'></i></button></td></tr>";
+    
+            // show_table(std_name, std_username, std_email);
+            console.log("show_table updated");
+    
+            name = document.getElementById('full_name').value = " ";
+            username = document.getElementById('username').value = " ";
+            email = document.getElementById('email').value = " ";
+            phone = document.getElementById('phone_num').value = " ";
+            password = document.getElementById('password').value = "";
 
-    function row_edit( button_id )
-    {
+            //submit btn TExt convert into Update
+            console.log(sub_btn.innerHTML = "Submit");
 
-//submit btn hidden when update
-        console.log(sub_btn);
-        sub_btn.classList.add('hidden');
+       }
+       else{
+        std_name.push(obj['name']);
+        std_username.push(obj['username']);
+        std_email.push(obj['email']);
+        std_phone.push(obj['phone']);
+        std_password.push(obj['password']);
 
-//update btn show when update
-        console.log(upd_btn);
-        upd_btn.classList.add('show');
-
-        button_id = document.getElementById(button_id).id;
-        console.log("button_id" , button_id);
-
-        button_id = button_id.split("edit_id_");
-        console.log("button_id" , button_id);
-        // console.log("button_id[0]" , button_id[0]);
-
-        //button_id[1] = row id
-        row_id = button_id[1];
-        console.log("button_id[1]" , row_id);
-        
-
-//obj value on selected row
-        let row_ele = document.getElementById('row_id_' + row_id).value;
-        console.log("row_ele" , row_ele);
-
-        sel_name = std_name[row_id];
-        let sel_username = std_username[row_id];
-        let sel_email = std_email[row_id];
-
-        console.log("sel_namename" , sel_name);
-        console.log("sel_username" , sel_username);
-        console.log("sel_email" , sel_email);
-        
-        let show_name = document.getElementById('full_name');
-        let show_username = document.getElementById('username');
-        let show_email = document.getElementById('email');
-        
-        show_name.value = sel_name;
-        show_username.value = sel_username;
-        show_email.value = sel_email;
-
-        console.log("show_name.value" , show_name.value);
-        console.log("show_username.value" , show_username.value);
-        console.log("show_email.value" , show_email.value);
-       
-    }
-
-
-
-
-    function row_delete( button_id )
-    {
-        button_id = document.getElementById(button_id).id;
-        console.log("button_id" , button_id);
-
-        button_id = button_id.split("delete_id_");
-        console.log("button_id" , button_id);
-        // console.log("button_id[0]" , button_id[0]);
-
-        //button_id[1] = row id
-        console.log("button_id[1]" , button_id[1]);
-        
-
-        obj =  get_ele_value();
-        std_name.splice( button_id[1] , 1 );
-        std_username.splice( button_id[1] , 1 );
-        std_email.splice( button_id[1] , 1 );
-
-        console.log("std_name" , std_name);
-        console.log("std_username" , std_username);
-        console.log("std_email" , std_email);
+        console.log("std_name", std_name);
+        console.log("std_username", std_username);
+        console.log("std_email", std_email);
 
         show_table();
-       
+
+        name = document.getElementById('full_name').value = "";
+        username = document.getElementById('username').value = "";
+        email = document.getElementById('email').value = "";
+        phone = document.getElementById('phone_num').value = " ";
+        password = document.getElementById('password').value = "";
+
+       }
+        
+
+    }
+    else {
+        alert("Some feild left blank!");
     }
 
+}
 
-    function on_submit( )
-    {
-        
-        obj =  get_ele_value();
+function show_table() {
 
-        if( ( obj['name'] !== ( "" ) ) && ( obj['username'] !== ( "" ) ) && ( obj['email'] !== ( "" ) ) )
-        {
-            // console.log(document.getElementById('body').style.backgroundSize = "contain");
-            std_name.push(obj['name']);
-            std_username.push(obj['username']);
-            std_email.push(obj['email']);
+    let show_div = document.getElementById('table_div');
+    show_div.classList.add('show');
 
-            console.log("std_name" , std_name);
-            console.log("std_username" , std_username);
-            console.log("std_email" , std_email);
+    let tbody_show = document.getElementById('tbody');
 
-            show_table();
+    render_table = "";
+    for (let a = 0; a < std_name.length; a++) {
 
-            name = document.getElementById('full_name').value = "";
-            username = document.getElementById('username').value = "";
-            email = document.getElementById('email').value = "";
-        
-            console.log(name);
-            console.log(username);
-            console.log(email);
+        let c = " row_delete('delete_id_" + [a] + "')";
+        let d = " row_edit('edit_id_" + [a] + "')";
 
-        }
-        else
-        {
-            alert("Some feild left blank!");
-        }
-        
+        render_table +=
+            "<tr id='row_id_" + a + "'><td id='roll_id_" + a + "'>" + a +
+            "</td><td id='name_id_" + a + "' class = 'td_style'>" + std_name[a] +
+            "</td><td id='username_id_" + a + "'>" + std_username[a] +
+            "</td><td id='email_id_" + a + "'>" + std_email[a] +
+            "</td><td id='phone_id_" + a + "'>" + std_phone[a] +
+            "</td><td class = 'action'>" +
+            "<button id='delete_id_" + [a] + "' class = 'btn btn-danger' onclick =" + c + "><i class='fas fa-trash-alt' id = 'del_id_" + [a] + "'></i></button>" +
+            "<button id='edit_id_" + [a] + "' class = 'btn btn-warning' onclick=" + d + "><i class='fas fa-pencil-alt' id = 'edi_id_" + [a] + "'></i></button></td></tr>";
+
     }
+    tbody_show.innerHTML = render_table;
+    console.log(render_table);
+
+    return render_table;
+
+}
+
+
+function row_edit(button_id) {
+    console.log("button_id", button_id);
+
+    //submit btn TExt convert into Update
+    console.log(sub_btn.innerHTML = "Update");
+
+
+    button_id = button_id.split("edit_id_");
+    console.log("button_id", button_id);
+    // console.log("button_id[0]" , button_id[0]);
+
+    //button_id[1] = row id
+    row_id = button_id[1];
+    console.log("button_id[1]", row_id);
+    console.log("selected_id Row === ", row_id);
+
+    //obj value on selected row
+    let row_ele = document.getElementById('row_id_' + row_id).value;
+    console.log("row_ele", row_ele);
+
+    sel_name = std_name[row_id];
+    let sel_username = std_username[row_id];
+    let sel_email = std_email[row_id];
+    let sel_phone = std_phone[row_id];
+    let sel_password = std_password[row_id];
+
+    console.log("sel_namename", sel_name);
+    console.log("sel_username", sel_username);
+    console.log("sel_email", sel_email);
+
+    let show_name = document.getElementById('full_name');
+    let show_username = document.getElementById('username');
+    let show_email = document.getElementById('email');
+    let show_phone = document.getElementById('phone_num');
+    let show_password = document.getElementById('password');
+
+    show_name.value = sel_name;
+    show_username.value = sel_username;
+    show_email.value = sel_email;
+    show_phone.value = sel_phone;
+    show_password.value = sel_password;
+
+    console.log("show_name.value", show_name.value);
+    console.log("show_username.value", show_username.value);
+    console.log("show_email.value", show_email.value);
+    console.log("show_phone", show_phone.value);
+    console.log("show_password.value", show_password.value);
+
+}
+
+
 
