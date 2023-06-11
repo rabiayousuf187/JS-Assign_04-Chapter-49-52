@@ -19,3 +19,14 @@ body{
 .hidden{
     display: none;
 }
+.show_more .heading{
+    font-size: 35px;
+    color: rgb(255, 255, 255);
+    margin: 10px 50px;
+    font-weight: 600;
+}
+.show_more p{
+    /* font-size: 35px; */
+    color: rgb(255, 255, 255);
+    /* margin: 100px 50px; */
+}
